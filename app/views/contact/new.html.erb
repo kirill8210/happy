@@ -1,0 +1,44 @@
+<h1>Рассылка</h1>
+<% if @message.errors.any? %>
+        <div class="alert alert-error">
+
+          <ul>
+            <% @message.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+<% end %>
+<div class="row">
+  <div class="span6 offset3">
+  <%= form_for @message, :url => contact_path do |form| %>
+    <fieldset class="fields">
+      <div class="field">
+        <%= form.label :name, "Ваше имя" %>
+        <%= form.text_field :name %>
+      </div>
+      <div class="field">
+        <%= form.label :email %>
+        <%= form.text_field :email %>
+      </div>
+      <div class="field">
+        <%= form.label :phone, "Телефон" %>
+        <%= form.phone_field :phone %>
+      </div>
+      <div class="field">
+        <%= form.label :subject, "Тема" %>
+        <%= form.select :subject, [ ['Все предложения ', 'Все предложения'],['Горящие туры ', 'Горящие туры'],
+                                  ['Только Шарм-эль-Шейх', 'Только Шарм-эль-Шейх'],
+                                  ['Только Хургада', 'Только Хургада']] %>
+      </div>
+      <div class="field">
+        <%= form.label :body, "Пожелания" %>
+        <%= form.text_area :body, size: "50x9" %>
+      </div>
+    </fieldset>
+    <fieldset class="actions">
+      <%= form.submit "Подписаться", class: "btn btn-large btn-primary" %>
+    </fieldset>
+<% end %>
+</div>
+</div>
